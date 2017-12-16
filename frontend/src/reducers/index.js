@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
+import PostsReducer from "./postsReducer";
 
 const rootReducer = combineReducers({
   categories: {},
-  posts: {},
+  posts: PostsReducer,
   comments: {},
 });
 

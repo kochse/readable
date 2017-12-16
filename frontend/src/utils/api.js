@@ -1,4 +1,4 @@
-const api = 'http://localhost:3001/';
+const api = 'http://localhost:3001';
 
 let token = localStorage.token;
 if (!token) {
@@ -13,12 +13,14 @@ const headers = {
   Authorization: token,
 };
 
+export const fetchPosts = () => fetch(`${api}/posts`, { headers })
+  .then(res => res.json());
+
 export const getCategories = () => fetch(`${api}/categories`, { headers }).then(res => res.json());
 
-export const getPostsForCategory = category =>
+export const getPostsForCategory = (category) =>
   fetch(`${api}/${category}/posts`, { headers }).then(res => res.json());
 
-export const getPosts = () => fetch(`${api}/posts`, { headers }).then(res => res.json());
 
 export const addPost = (id, timestamp, title, body, author, category) =>
   fetch(`${api}/posts`, {
@@ -52,7 +54,7 @@ export const deletePost = post =>
     },
   }).then(res => res.json());
 
-export const getCommentsForPost = post =>
+export const fetchCommentsForPost = post =>
   fetch(`${api}/posts/${post.id}/comments`, { headers }).then(res => res.json());
 
 export const addCommentToPost = (post, id, timestamp, body, author) =>
