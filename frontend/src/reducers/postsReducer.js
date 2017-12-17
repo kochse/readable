@@ -1,9 +1,11 @@
-import { RECEIVE_POSTS } from '../actions/types';
+import * as types from '../actions/types';
 
-export default function(state = [], action) {
+export default function(state = {}, action) {
   switch (action.type) {
-    case RECEIVE_POSTS:
-      return action.payload;
+    case types.RECEIVE_POSTS:
+      return Object.assign({}, ...action.payload.map(item => ({ [item['id']]: item })));
+    case types.RECEIVE_POST:
+      return { ...state, [action.payload.id]: action.payload };
     default:
       return state;
   }

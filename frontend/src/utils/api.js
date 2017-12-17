@@ -32,8 +32,8 @@ export const addPost = (id, timestamp, title, body, author, category) =>
     body: JSON.stringify({ id, timestamp, title, body, author, category }),
   }).then(res => res.json());
 
-export const getPost = post =>
-  fetch(`${api}/posts/${post.id}`, { headers }).then(res => res.json());
+export const fetchPost = postId =>
+  fetch(`${api}/posts/${postId}`, { headers }).then(res => res.json());
 
 export const updatePost = (post, title, body) =>
   fetch(`${api}/posts/${post.id}`, {

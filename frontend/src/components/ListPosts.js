@@ -10,8 +10,12 @@ class ListPosts extends React.Component {
   }
 
   renderPosts = () => {
-    return this.props.posts.map(post => {
-      return <PostItem post={post} />;
+    const posts = this.props.posts;
+    if(Object.keys(posts).length === 0) {
+      return <p>0 posts</p>;
+    }
+    return Object.keys(posts).map(key => {
+      return <PostItem post={posts[key]} />;
     });
   };
 
