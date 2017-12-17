@@ -16,6 +16,12 @@ const headers = {
 export const fetchPosts = () => fetch(`${api}/posts`, { headers })
   .then(res => res.json());
 
+export const fetchPost = postId =>
+  fetch(`${api}/posts/${postId}`, { headers }).then(res => res.json());
+
+export const fetchComments = postId =>
+  fetch(`${api}/posts/${postId}/comments`, { headers }).then(res => res.json());
+
 export const getCategories = () => fetch(`${api}/categories`, { headers }).then(res => res.json());
 
 export const getPostsForCategory = (category) =>
@@ -31,9 +37,6 @@ export const addPost = (id, timestamp, title, body, author, category) =>
     },
     body: JSON.stringify({ id, timestamp, title, body, author, category }),
   }).then(res => res.json());
-
-export const fetchPost = postId =>
-  fetch(`${api}/posts/${postId}`, { headers }).then(res => res.json());
 
 export const updatePost = (post, title, body) =>
   fetch(`${api}/posts/${post.id}`, {
@@ -54,8 +57,7 @@ export const deletePost = post =>
     },
   }).then(res => res.json());
 
-export const fetchCommentsForPost = post =>
-  fetch(`${api}/posts/${post.id}/comments`, { headers }).then(res => res.json());
+
 
 export const addCommentToPost = (post, id, timestamp, body, author) =>
   fetch(`${api}/posts`, {

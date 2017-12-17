@@ -1,2 +1,3 @@
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const RECEIVE_POST = 'RECEIVE_POST';
+export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
