@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import { fetchComments } from '../actions';
 
 class ListComments extends React.Component {
@@ -32,7 +33,9 @@ class ListComments extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  comments: state.comments,
+  comments: _.filter(state.comments, comment => {
+    return comment.parentId === ownProps.postId
+  }),
 });
 
 export default connect(mapStateToProps, { fetchComments })(ListComments);
