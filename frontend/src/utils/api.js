@@ -46,12 +46,9 @@ export const voteComment = (commentId, option) =>
     body: JSON.stringify({ option }),
   }).then(res => res.json());
 
-export const getPostsForCategory = (category) =>
-  fetch(`${api}/${category}/posts`, { headers }).then(res => res.json());
-
-
-export const addPost = (id, timestamp, title, body, author, category) =>
-  fetch(`${api}/posts`, {
+export const createPost = (post) => {
+  const { id, timestamp, title, body, author, category } = post;
+  return fetch(`${api}/posts`, {
     method: 'POST',
     headers: {
       ...headers,
@@ -59,9 +56,11 @@ export const addPost = (id, timestamp, title, body, author, category) =>
     },
     body: JSON.stringify({ id, timestamp, title, body, author, category }),
   }).then(res => res.json());
+}
 
-export const updatePost = (post, title, body) =>
-  fetch(`${api}/posts/${post.id}`, {
+export const updatePost = (post) => {
+  const { id, title, body } = post;
+  return fetch(`${api}/posts/${id}`, {
     method: 'PUT',
     headers: {
       ...headers,
@@ -69,6 +68,7 @@ export const updatePost = (post, title, body) =>
     },
     body: JSON.stringify({ title, body }),
   }).then(res => res.json());
+}
 
 export const deletePost = post =>
   fetch(`${api}/posts/${post.id}`, {
@@ -79,10 +79,8 @@ export const deletePost = post =>
     },
   }).then(res => res.json());
 
-
-
-export const addCommentToPost = (post, id, timestamp, body, author) =>
-  fetch(`${api}/posts`, {
+export const createComment = (post, id, timestamp, body, author) =>
+  fetch(`${api}/comments`, {
     method: 'POST',
     headers: {
       ...headers,
@@ -90,9 +88,6 @@ export const addCommentToPost = (post, id, timestamp, body, author) =>
     },
     body: JSON.stringify({ id, timestamp, body, author, parentId: post.id }),
   }).then(res => res.json());
-
-export const getComment = comment =>
-  fetch(`${api}/comments/${comment.id}`, { headers }).then(res => res.json());
 
 export const updateComment = (comment, body) =>
   fetch(`${api}/comments/${comment.id}`, {

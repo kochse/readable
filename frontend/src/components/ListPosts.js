@@ -26,7 +26,7 @@ class ListPosts extends React.Component {
         <div className="d-flex justify-content-center">
           <h4><Link to="/">Readable</Link></h4>
         </div>
-          <button type="button" className="btn btn-light">create post</button>
+        <Link to="/create"><button type="button" className="btn btn-light">create post</button></Link>
       </div>
     );
   };

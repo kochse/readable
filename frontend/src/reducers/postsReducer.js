@@ -14,6 +14,18 @@ export default function(state = {}, action) {
       const post = state[action.payload];
       return { ...state, [action.payload]: { ...post, voteScore: post.voteScore - 1 } };
     }
+    case types.CREATE_POST: {
+      const post = action.payload;
+      return { ...state, [post.id]: { ...post } };
+    }
+    case types.UPDATE_POST: {
+      const post = action.payload;
+      return { ...state, [post.id]: { ...state[post.id], title: post.title, body: post.body } };
+    }
+    case types.DELETE_POST: {
+      const postId = action.payload;
+      return { ...state, [postId]: { ...state[postId], deleted: true } };
+    }
     default:
       return state;
   }
