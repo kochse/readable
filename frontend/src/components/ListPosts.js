@@ -22,10 +22,11 @@ class ListPosts extends React.Component {
 
   renderHeader = () => {
     return (
-      <div className="pb-2 d-flex justify-content-between">
-        <div />
-        <h1><Link to="/">Readable</Link></h1>
-        <button type="button" className="btn btn-light">create post</button>
+      <div className="pb-2">
+        <div className="d-flex justify-content-center">
+          <h4><Link to="/">Readable</Link></h4>
+        </div>
+          <button type="button" className="btn btn-light">create post</button>
       </div>
     );
   };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchPost, upVotePost, downVotePost } from '../actions';
 import ListComments from './ListComments';
 
@@ -7,6 +8,13 @@ class Post extends React.Component {
   componentDidMount() {
     this.props.fetchPost(this.props.postId);
   }
+  renderHeader = () => {
+    return (
+      <div className="pb-2n d-flex justify-content-center">
+        <h4><Link to="/">Readable</Link></h4>
+      </div>
+    );
+  };
   editPost = () => {
 
   };
@@ -22,7 +30,9 @@ class Post extends React.Component {
       return null;
     }
     return (
+
       <div className="m-4">
+        {this.renderHeader()}
         <div className="mt-2 mb-2 d-flex justify-content-between">
           <p>Score: {post.voteScore}</p>
           <div>
