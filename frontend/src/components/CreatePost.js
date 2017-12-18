@@ -47,7 +47,8 @@ class CreatePost extends React.Component {
     });
   };
 
-  handleCreatePost = () => {
+  handleCreatePost = (event) => {
+    event.preventDefault();
     const post = {
       id: uuidv4(),
       timestamp: Date.now(),
@@ -68,7 +69,7 @@ class CreatePost extends React.Component {
       <div className="m-4">
         {this.renderHeader()}
         <h2>Create post</h2>
-        <form>
+        <form onSubmit={(event) => this.handleCreatePost(event)}>
           <div className="form-group">
             <label>Category</label>
             <select className="form-control" value={this.state.category} onChange={this.handleCategoryChange} >
@@ -87,7 +88,7 @@ class CreatePost extends React.Component {
             <label>Author</label>
             <input className="form-control" placeholder="Enter author" value={this.state.author} onChange={this.handleAuthorChange} />
           </div>
-          <button type="submit" className="btn btn-primary" onClick={() => this.handleCreatePost()}>
+          <button type="submit" className="btn btn-primary">
             Create Post
           </button>
         </form>

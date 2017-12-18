@@ -44,7 +44,8 @@ class CreatePost extends React.Component {
     });
   };
 
-  handleUpdatePost = () => {
+  handleUpdatePost = (event) => {
+    event.preventDefault();
     const post = {
       id: this.props.postId,
       title: this.state.title,
@@ -62,7 +63,7 @@ class CreatePost extends React.Component {
       <div className="m-4">
         {this.renderHeader()}
         <h2>Create post</h2>
-        <form>
+        <form id="updatePost" onSubmit={(event) => this.handleUpdatePost(event)}>
           <div className="form-group">
             <label>Category</label>
             <select className="form-control" value={this.props.post.category} disabled >
@@ -81,7 +82,7 @@ class CreatePost extends React.Component {
             <label>Author</label>
             <input className="form-control" placeholder="Enter author" value={this.props.post.author} readOnly />
           </div>
-          <button type="submit" className="btn btn-primary" onClick={() => this.handleUpdatePost()}>
+          <button type="submit" className="btn btn-primary">
             Update Post
           </button>
         </form>
