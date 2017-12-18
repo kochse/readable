@@ -1,12 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 
 const PostItem = ({ post, upVotePost, downVotePost, editPost, deletePost }) => (
   <li className="list-group-item">
     <div className="mt-2 mb-2 d-flex justify-content-between"><span>Score: {post.voteScore}</span><span>{new Date(post.timestamp).toDateString()}</span>
       <div>
-        <button onClick={() => editPost(post.id)}>edit</button>
+        <Link to={`/${post.category}/${post.id}/update`}><button>edit</button></Link>
         <button onClick={() => deletePost(post.id)}>delete</button>
       </div>
     </div>
@@ -19,12 +18,5 @@ const PostItem = ({ post, upVotePost, downVotePost, editPost, deletePost }) => (
     </div>
   </li>
 );
-
-
-PostItem.propTypes = {
-  post: PropTypes.object,
-  upVotePost: PropTypes.func,
-  downVotePost: PropTypes.func,
-};
 
 export default PostItem;

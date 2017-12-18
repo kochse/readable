@@ -15,9 +15,6 @@ class Post extends React.Component {
       </div>
     );
   };
-  editPost = () => {
-
-  };
   handleDeletePost = () => {
     this.props.deletePost(this.props.postId);
     this.props.history.push('/');
@@ -36,7 +33,7 @@ class Post extends React.Component {
         <div className="mt-2 mb-2 d-flex justify-content-between">
           <p>Score: {post.voteScore}</p>
           <div>
-            <button onClick={() => this.editPost()}>edit</button>
+            <Link to={`/${post.category}/${post.id}/update`}><button>edit</button></Link>
             <button onClick={() => this.handleDeletePost()}>delete</button>
           </div>
         </div>

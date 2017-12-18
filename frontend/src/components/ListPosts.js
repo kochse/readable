@@ -1,6 +1,5 @@
 import React from 'react';
 import _ from 'lodash';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchPosts, upVotePost, downVotePost, deletePost } from '../actions';
@@ -68,11 +67,6 @@ class ListPosts extends React.Component {
     );
   }
 }
-
-ListPosts.propTypes = {
-  fetchPosts: PropTypes.func,
-  posts: PropTypes.array,
-};
 
 const mapStateToProps = (state, ownProps) => {
   const category = ownProps.match.params.category;
