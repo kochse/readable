@@ -7,10 +7,13 @@ class CreatePost extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      title: props.post.title,
-      body: props.post.body,
-    };
+    if(this.props.post) {
+      this.state = {
+        title: props.post.title,
+        body: props.post.body,
+      };
+    }
+
   }
   componentDidMount() {
     this.props.fetchCategories();
@@ -48,10 +51,13 @@ class CreatePost extends React.Component {
       body: this.state.body,
     };
     this.props.updatePost(post);
-    this.props.history.push(`/${post.category}/${post.id}`);
+    this.props.history.push(`/${this.props.post.category}/${post.id}`);
   };
 
   render() {
+    if(!this.props.post) {
+      return null;
+    }
     return (
       <div className="m-4">
         {this.renderHeader()}
@@ -59,7 +65,7 @@ class CreatePost extends React.Component {
         <form>
           <div className="form-group">
             <label>Category</label>
-            <select className="form-control" value={this.props.post.category} readonly >
+            <select className="form-control" value={this.props.post.category} disabled >
               {this.renderCategories()}
             </select>
           </div>
@@ -73,7 +79,7 @@ class CreatePost extends React.Component {
           </div>
           <div className="form-group">
             <label>Author</label>
-            <input className="form-control" placeholder="Enter author" value={this.props.post.author} readonly />
+            <input className="form-control" placeholder="Enter author" value={this.props.post.author} readOnly />
           </div>
           <button type="submit" className="btn btn-primary" onClick={() => this.handleUpdatePost()}>
             Update Post
