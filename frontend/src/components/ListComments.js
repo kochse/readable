@@ -12,7 +12,7 @@ class ListComments extends React.Component {
   renderComments = () => {
     const { comments, upVoteComment, downVoteComment } = this.props;
     return Object.keys(comments).map(key => {
-      return <Comment comment={comments[key]} upVoteComment={upVoteComment} downVoteComment={downVoteComment} />;
+      return <Comment key={key} comment={comments[key]} upVoteComment={upVoteComment} downVoteComment={downVoteComment} />;
     });
   };
 
