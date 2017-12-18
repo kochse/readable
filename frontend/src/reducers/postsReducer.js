@@ -6,6 +6,14 @@ export default function(state = {}, action) {
       return Object.assign({}, ...action.payload.map(item => ({ [item['id']]: item })));
     case types.RECEIVE_POST:
       return { ...state, [action.payload.id]: action.payload };
+    case types.UPVOTE_POST: {
+      const post = state[action.payload];
+      return { ...state, [action.payload]: { ...post, voteScore: post.voteScore + 1 } };
+    }
+    case types.DOWNVOTE_POST: {
+      const post = state[action.payload];
+      return { ...state, [action.payload]: { ...post, voteScore: post.voteScore - 1 } };
+    }
     default:
       return state;
   }

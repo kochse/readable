@@ -25,7 +25,6 @@ class Categories extends React.Component {
   render() {
     return (
       <nav className="nav">
-        <Link className="nav-link" to={`/`}>All</Link>
         {this.renderCategories()}
       </nav>
     );
