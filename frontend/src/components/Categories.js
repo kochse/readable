@@ -9,6 +9,9 @@ class Categories extends React.Component {
   }
 
   renderCategory = category => {
+    if(this.props.current === category.path) {
+      return <a className="nav-link">{category.name}</a>;
+    }
     return <Link className="nav-link" to={`/${category.path}`}>{category.name}</Link>;
   };
 
@@ -31,7 +34,7 @@ class Categories extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
   categories: state.categories,
 });
 
