@@ -26,6 +26,11 @@ export default function(state = {}, action) {
       const postId = action.payload;
       return { ...state, [postId]: { ...state[postId], deleted: true } };
     }
+    case types.CREATE_COMMENT: {
+      const comment = action.payload;
+      const parent = state[comment.parentId];
+      return { ...state, [comment.parentId]: { ...parent, commentCount: parent.commentCount + 1 } };
+    }
     default:
       return state;
   }

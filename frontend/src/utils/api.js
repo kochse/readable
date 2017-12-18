@@ -79,15 +79,19 @@ export const deletePost = postId =>
     },
   }).then(res => res.json());
 
-export const createComment = (post, id, timestamp, body, author) =>
-  fetch(`${api}/comments`, {
+export const createComment = (comment) => {
+  const { parentId, id, timestamp, body, author } = comment;
+  return fetch(`${api}/comments`, {
     method: 'POST',
     headers: {
       ...headers,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ id, timestamp, body, author, parentId: post.id }),
+    body: JSON.stringify({ id, timestamp, body, author, parentId }),
   }).then(res => res.json());
+}
+
+
 
 export const updateComment = (comment, body) =>
   fetch(`${api}/comments/${comment.id}`, {

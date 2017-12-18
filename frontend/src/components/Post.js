@@ -1,10 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchPost, upVotePost, downVotePost, deletePost } from '../actions';
+import { fetchPost, upVotePost, downVotePost, deletePost, createComment } from '../actions';
 import ListComments from './ListComments';
+import CreateComment from './CreateComment';
 
 class Post extends React.Component {
+  state = {
+    showCreateComment: false,
+  };
   componentDidMount() {
     this.props.fetchPost(this.props.postId);
   }
@@ -20,7 +24,15 @@ class Post extends React.Component {
     this.props.history.push('/');
   };
   createComment = () => {
-
+    if(!this.state.showCreateComment) {
+      this.setState({ ...this.state, showCreateComment: true });
+    } else {
+      this.setState({ ...this.state, showCreateComment: false });
+    }
+  };
+  handleCreateComment = (comment) => {
+    this.props.createComment(comment);
+    this.setState({ ...this.state, showCreateComment: false });
   };
   render() {
     const { postId, post, upVotePost, downVotePost } = this.props;
@@ -49,6 +61,7 @@ class Post extends React.Component {
           <h4 className="mt-2">{post.commentCount} Comments</h4>
           <button onClick={() => this.createComment()}>create comment</button>
         </div>
+        { this.state.showCreateComment && <CreateComment parent={this.props.postId} createComment={this.handleCreateComment}/> }
         <ListComments postId={postId} />
       </div>
     );
@@ -60,4 +73,4 @@ const mapStateToProps = (state, ownProps) => ({
   post: state.posts[ownProps.match.params.postId],
 });
 
-export default connect(mapStateToProps, { fetchPost, upVotePost, downVotePost, deletePost })(Post);
+export default connect(mapStateToProps, { fetchPost, upVotePost, downVotePost, deletePost, createComment })(Post);
