@@ -54,7 +54,7 @@ class ListPosts extends React.Component {
     }
     const { upVotePost, downVotePost } = this.props;
     return Object.keys(posts).map(key => {
-      return <PostItem post={posts[key]} upVotePost={upVotePost} downVotePost={downVotePost} />;
+      return <PostItem post={posts[key]} upVotePost={upVotePost} downVotePost={downVotePost} key={key} />;
     });
   };
 
@@ -74,7 +74,7 @@ class ListPosts extends React.Component {
 
 ListPosts.propTypes = {
   fetchPosts: PropTypes.func,
-  posts: PropTypes.Array,
+  posts: PropTypes.object,
 };
 
 const mapStateToProps = (state, ownProps) => {

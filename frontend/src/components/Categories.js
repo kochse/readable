@@ -10,9 +10,9 @@ class Categories extends React.Component {
 
   renderCategory = category => {
     if(this.props.current === category.path) {
-      return <a className="nav-link">{category.name}</a>;
+      return <a className="nav-link" key={category.path}>{category.name}</a>;
     }
-    return <Link className="nav-link" to={`/${category.path}`}>{category.name}</Link>;
+    return <Link className="nav-link" to={`/${category.path}`} key={category.path}>{category.name}</Link>;
   };
 
   renderCategories = () => {
