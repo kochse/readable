@@ -2,30 +2,27 @@ import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { fetchComments } from '../actions';
+import Comment from './Comment';
 
 class ListComments extends React.Component {
   componentDidMount() {
     this.props.fetchComments(this.props.postId);
   }
 
-  renderComment = (comment) => {
-    return <li>{comment.body}</li>;
-  }
-
   renderComments = () => {
     const { comments } = this.props;
-    if(Object.keys(comments).length === 0) {
-      return <p>0 comments</p>;
-    }
     return Object.keys(comments).map(key => {
-      return this.renderComment(comments[key]);
+      return <Comment comment={comments[key]} />;
     });
   };
 
   render() {
+    const { comments } = this.props;
+    if(Object.keys(comments).length === 0) {
+      return null;
+    }
     return (
       <div>
-        <h1>Comments</h1>
         {this.renderComments()}
       </div>
     );

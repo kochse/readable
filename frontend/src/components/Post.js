@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchPost } from '../actions';
+import { fetchPost, upVotePost, downVotePost } from '../actions';
 import ListComments from './ListComments';
 
 class Post extends React.Component {
@@ -8,18 +8,22 @@ class Post extends React.Component {
     this.props.fetchPost(this.props.postId);
   }
   render() {
-    const { postId, post } = this.props;
+    const { postId, post, upVotePost, downVotePost } = this.props;
     if(!post) {
-      return <p>no matching post</p>;
+      return null;
     }
     return (
-      <div>
+      <div className="m-4">
+        <p>Score: {post.voteScore}</p>
         <h2>{post.title}</h2>
-        <p>{post.body}</p>
+        <div className="mt-4 mb-4"><p>{post.body}</p></div>
         <p>Author: {post.author}</p>
         <p>Category: {post.category}</p>
-        <p>Score: {post.voteScore}</p>
-        <p>Comments: {post.commentCount}</p>
+        <div className="mb-2 btn-group" role="group">
+          <button type="button" className="btn btn-success" onClick={() => upVotePost(post.id)}>Upvote</button>
+          <button type="button" className="btn btn-danger" onClick={() => downVotePost(post.id)}>Downvote</button>
+        </div>
+        <h4 className="mt-4">{post.commentCount} Comments</h4>
         <ListComments postId={postId} />
       </div>
     );
@@ -31,4 +35,4 @@ const mapStateToProps = (state, ownProps) => ({
   post: state.posts[ownProps.match.params.postId],
 });
 
-export default connect(mapStateToProps, { fetchPost })(Post);
+export default connect(mapStateToProps, { fetchPost, upVotePost, downVotePost })(Post);
