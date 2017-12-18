@@ -31,6 +31,16 @@ export const receiveDownVotePost = postId => ({
   payload: postId,
 });
 
+export const receiveUpVoteComment = commentId => ({
+  type: types.UPVOTE_COMMENT,
+  payload: commentId,
+});
+
+export const receiveDownVoteComment = commentId => ({
+  type: types.DOWNVOTE_COMMENT,
+  payload: commentId,
+});
+
 export const fetchCategories = () => dispatch =>
   API.fetchCategories().then(categories => dispatch(receiveCategories(categories)));
 
@@ -48,3 +58,9 @@ export const upVotePost = (postId) => dispatch =>
 
 export const downVotePost = (postId) => dispatch =>
   API.votePost(postId, 'downVote').then(() => dispatch(receiveDownVotePost(postId)));
+
+export const upVoteComment = (commentId) => dispatch =>
+  API.voteComment(commentId, 'upVote').then(() => dispatch(receiveUpVoteComment(commentId)));
+
+export const downVoteComment = (commentId) => dispatch =>
+  API.voteComment(commentId, 'downVote').then(() => dispatch(receiveDownVoteComment(commentId)));

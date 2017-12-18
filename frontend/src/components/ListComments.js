@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { fetchComments } from '../actions';
+import { fetchComments, upVoteComment, downVoteComment } from '../actions';
 import Comment from './Comment';
 
 class ListComments extends React.Component {
@@ -10,9 +10,9 @@ class ListComments extends React.Component {
   }
 
   renderComments = () => {
-    const { comments } = this.props;
+    const { comments, upVoteComment, downVoteComment } = this.props;
     return Object.keys(comments).map(key => {
-      return <Comment comment={comments[key]} />;
+      return <Comment comment={comments[key]} upVoteComment={upVoteComment} downVoteComment={downVoteComment} />;
     });
   };
 
@@ -35,4 +35,4 @@ const mapStateToProps = (state, ownProps) => ({
   }),
 });
 
-export default connect(mapStateToProps, { fetchComments })(ListComments);
+export default connect(mapStateToProps, { fetchComments, upVoteComment, downVoteComment })(ListComments);
