@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchPost, upVotePost, downVotePost } from '../actions';
+import { fetchPost, upVotePost, downVotePost, deletePost } from '../actions';
 import ListComments from './ListComments';
 
 class Post extends React.Component {
@@ -18,8 +18,9 @@ class Post extends React.Component {
   editPost = () => {
 
   };
-  deletePost = () => {
-
+  handleDeletePost = () => {
+    this.props.deletePost(this.props.postId);
+    this.props.history.push('/');
   };
   createComment = () => {
 
@@ -36,7 +37,7 @@ class Post extends React.Component {
           <p>Score: {post.voteScore}</p>
           <div>
             <button onClick={() => this.editPost()}>edit</button>
-            <button onClick={() => this.deletePost()}>delete</button>
+            <button onClick={() => this.handleDeletePost()}>delete</button>
           </div>
         </div>
         <h2>{post.title}</h2>
@@ -62,4 +63,4 @@ const mapStateToProps = (state, ownProps) => ({
   post: state.posts[ownProps.match.params.postId],
 });
 
-export default connect(mapStateToProps, { fetchPost, upVotePost, downVotePost })(Post);
+export default connect(mapStateToProps, { fetchPost, upVotePost, downVotePost, deletePost })(Post);

@@ -3,7 +3,7 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchPosts, upVotePost, downVotePost } from '../actions';
+import { fetchPosts, upVotePost, downVotePost, deletePost } from '../actions';
 import PostItem from './PostItem';
 import Categories from './Categories';
 
@@ -40,7 +40,7 @@ class ListPosts extends React.Component {
   };
 
   renderPosts = () => {
-    let { posts } = this.props;
+    let { posts, deletePost } = this.props;
     if (this.state.sortByDate) {
       posts = _.sortBy(posts, post => {
         return post.timestamp + '';
@@ -51,7 +51,7 @@ class ListPosts extends React.Component {
     }
     const { upVotePost, downVotePost } = this.props;
     return Object.keys(posts).map(key => {
-      return <PostItem post={posts[key]} upVotePost={upVotePost} downVotePost={downVotePost} key={key} />;
+      return <PostItem post={posts[key]} upVotePost={upVotePost} downVotePost={downVotePost} key={key} deletePost={deletePost} />;
     });
   };
 
@@ -77,6 +77,9 @@ ListPosts.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   const category = ownProps.match.params.category;
   let posts = state.posts;
+  posts = _.filter(posts, post => {
+    return !post.deleted;
+  });
   if (category) {
     posts = _.filter(posts, post => {
       return post.category === category;
@@ -86,4 +89,4 @@ const mapStateToProps = (state, ownProps) => {
   return { posts };
 };
 
-export default connect(mapStateToProps, { fetchPosts, upVotePost, downVotePost })(ListPosts);
+export default connect(mapStateToProps, { fetchPosts, upVotePost, downVotePost, deletePost })(ListPosts);
