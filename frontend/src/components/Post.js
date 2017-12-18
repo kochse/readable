@@ -7,6 +7,15 @@ class Post extends React.Component {
   componentDidMount() {
     this.props.fetchPost(this.props.postId);
   }
+  editPost = () => {
+
+  };
+  deletePost = () => {
+
+  };
+  createComment = () => {
+
+  };
   render() {
     const { postId, post, upVotePost, downVotePost } = this.props;
     if(!post) {
@@ -14,7 +23,13 @@ class Post extends React.Component {
     }
     return (
       <div className="m-4">
-        <p>Score: {post.voteScore}</p>
+        <div className="mt-2 mb-2 d-flex justify-content-between">
+          <p>Score: {post.voteScore}</p>
+          <div>
+            <button onClick={() => this.editPost()}>edit</button>
+            <button onClick={() => this.deletePost()}>delete</button>
+          </div>
+        </div>
         <h2>{post.title}</h2>
         <div className="mt-4 mb-4"><p>{post.body}</p></div>
         <p>Author: {post.author}</p>
@@ -23,7 +38,10 @@ class Post extends React.Component {
           <button type="button" className="btn btn-success" onClick={() => upVotePost(post.id)}>Upvote</button>
           <button type="button" className="btn btn-danger" onClick={() => downVotePost(post.id)}>Downvote</button>
         </div>
-        <h4 className="mt-4">{post.commentCount} Comments</h4>
+        <div className="mt-4 mb-2 d-flex justify-content-between">
+          <h4 className="mt-2">{post.commentCount} Comments</h4>
+          <button onClick={() => this.createComment()}>create comment</button>
+        </div>
         <ListComments postId={postId} />
       </div>
     );
