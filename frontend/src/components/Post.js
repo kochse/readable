@@ -30,7 +30,6 @@ class Post extends React.Component {
       return null;
     }
     return (
-
       <div className="m-4">
         {this.renderHeader()}
         <div className="mt-2 mb-2 d-flex justify-content-between">

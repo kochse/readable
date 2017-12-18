@@ -41,13 +41,10 @@ class ListPosts extends React.Component {
 
   renderPosts = () => {
     let { posts } = this.props;
-    // Sort
     if (this.state.sortByDate) {
       posts = _.sortBy(posts, post => {
         return post.timestamp + '';
       }).reverse();
-    } else {
-      posts = _.sortBy(posts, ['voteScore']).reverse();
     }
     if (Object.keys(posts).length === 0) {
       return <p>0 posts</p>;
@@ -74,7 +71,7 @@ class ListPosts extends React.Component {
 
 ListPosts.propTypes = {
   fetchPosts: PropTypes.func,
-  posts: PropTypes.object,
+  posts: PropTypes.array,
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -85,6 +82,7 @@ const mapStateToProps = (state, ownProps) => {
       return post.category === category;
     });
   }
+  posts = _.sortBy(posts, ['voteScore']).reverse();
   return { posts };
 };
 

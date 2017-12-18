@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 
 const PostItem = ({ post, upVotePost, downVotePost, editPost, deletePost }) => (
-  <li className="list-group-item" key={post.id}>
+  <li className="list-group-item">
     <div className="mt-2 mb-2 d-flex justify-content-between"><span>Score: {post.voteScore}</span><span>{new Date(post.timestamp).toDateString()}</span>
       <div>
         <button onClick={() => editPost(post.id)}>edit</button>
