@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../actions';
 import PostItem from './PostItem';
+import Categories from './Categories';
 
 class ListPosts extends React.Component {
   componentDidMount() {
@@ -21,13 +22,13 @@ class ListPosts extends React.Component {
 
   render() {
     return (
-      <div className="p-5">
+      <div className="m-4">
         <div className="pb-2 d-flex justify-content-between">
           <h1>Readable</h1>
           <button type="button" className="btn btn-light">create post</button>
         </div>
         <div className="mt-3 d-flex justify-content-between">
-          <ul><li><a href="#">Category 1</a></li><li><a href="#">Category 2</a></li></ul>
+          <Categories current={this.props.match.params.category}/>
           <ul>Sort: <a href="#">date</a> <a href="#">score</a></ul>
         </div>
         {this.renderPosts()}

@@ -7,7 +7,8 @@ import './App.css';
 const App = () => (
   <div className="container-fluid">
     <Route exact path="/" component={ListPosts} />
-    <Route path="/view/:postId" component={Post} />
+    <Route exact path="/:category" component={ListPosts} />
+    <Route path="/:category/:postId" component={Post} />
   </div>
 );
 

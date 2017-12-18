@@ -1,6 +1,11 @@
 import * as API from '../utils/api';
 import * as types from './types';
 
+export const receiveCategories = categories => ({
+  type: types.RECEIVE_CATEGORIES,
+  payload: categories,
+});
+
 export const receivePosts = posts => ({
   type: types.RECEIVE_POSTS,
   payload: posts,
@@ -15,6 +20,9 @@ export const receiveComments = comments => ({
   type: types.RECEIVE_COMMENTS,
   payload: comments,
 });
+
+export const fetchCategories = () => dispatch =>
+  API.fetchCategories().then(categories => dispatch(receiveCategories(categories)));
 
 export const fetchPosts = () => dispatch =>
   API.fetchPosts().then(posts => dispatch(receivePosts(posts)));

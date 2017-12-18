@@ -10,4 +10,4 @@
     - `npm install`
     - `npm start`
 
-Open [http://localhost:3000](http://localhost:3000) to view the appcd  in the browser.
+Open [http://localhost:3000](http://localhost:3000) to view the app in the browser.
