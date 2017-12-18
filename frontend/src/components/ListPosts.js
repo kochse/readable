@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../actions';
@@ -10,8 +11,33 @@ class ListPosts extends React.Component {
     this.props.fetchPosts();
   }
 
+  renderHeader = () => {
+    return (
+      <div className="pb-2 d-flex justify-content-between">
+        <div />
+        <h1>Readable</h1>
+        <button type="button" className="btn btn-light">create post</button>
+      </div>
+    );
+  };
+
+  renderSort = () => {
+    return (
+      <ul>
+        Sort: <a href="">date</a> <a href="">score</a>
+      </ul>
+    );
+  };
+
   renderPosts = () => {
-    const posts = this.props.posts;
+    let { posts } = this.props;
+    const { match } = this.props;
+    const category = match.params.category;
+    if(category) {
+      posts = _.filter(posts, (post) => {
+        return post.category === category;
+      });
+    }
     if(Object.keys(posts).length === 0) {
       return <p>0 posts</p>;
     }
@@ -23,13 +49,10 @@ class ListPosts extends React.Component {
   render() {
     return (
       <div className="m-4">
-        <div className="pb-2 d-flex justify-content-between">
-          <h1>Readable</h1>
-          <button type="button" className="btn btn-light">create post</button>
-        </div>
+        {this.renderHeader()}
         <div className="mt-3 d-flex justify-content-between">
-          <Categories current={this.props.match.params.category}/>
-          <ul>Sort: <a href="#">date</a> <a href="#">score</a></ul>
+          <Categories current={this.props.match.params.category} />
+          {this.renderSort()}
         </div>
         {this.renderPosts()}
       </div>
