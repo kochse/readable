@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { fetchComments, upVoteComment, downVoteComment } from '../actions';
+import { fetchComments, upVoteComment, downVoteComment, deleteComment } from '../actions';
 import Comment from './Comment';
 
 class ListComments extends React.Component {
@@ -9,10 +9,14 @@ class ListComments extends React.Component {
     this.props.fetchComments(this.props.postId);
   }
 
+  handleDeleteComment = (comment) => {
+    this.props.deleteComment(comment);
+  }
+
   renderComments = () => {
     const { comments, upVoteComment, downVoteComment } = this.props;
     return Object.keys(comments).map(key => {
-      return <Comment key={key} comment={comments[key]} upVoteComment={upVoteComment} downVoteComment={downVoteComment} />;
+      return <Comment key={key} comment={comments[key]} upVoteComment={upVoteComment} downVoteComment={downVoteComment} deleteComment={this.handleDeleteComment}/>;
     });
   };
 
@@ -31,8 +35,8 @@ class ListComments extends React.Component {
 
 const mapStateToProps = (state, ownProps) => ({
   comments: _.filter(state.comments, comment => {
-    return comment.parentId === ownProps.postId
+    return comment.parentId === ownProps.postId && !comment.deleted
   }),
 });
 
-export default connect(mapStateToProps, { fetchComments, upVoteComment, downVoteComment })(ListComments);
+export default connect(mapStateToProps, { fetchComments, upVoteComment, downVoteComment, deleteComment })(ListComments);

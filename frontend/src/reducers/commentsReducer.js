@@ -21,8 +21,8 @@ export default function(state = {}, action) {
       return { ...state, [comment.id]: { ...state[comment.id], body: comment.body } };
     }
     case types.DELETE_COMMENT: {
-      const commentId = action.payload;
-      return { ...state, [commentId]: { ...state[commentId], deleted: true } };
+      const comment = action.payload;
+      return { ...state, [comment.id]: { ...state[comment.id], deleted: true } };
     }
     default:
       return state;

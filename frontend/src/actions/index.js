@@ -110,5 +110,5 @@ export const createComment = comment => dispatch =>
 export const updateComment = comment => dispatch =>
   API.updateComment(comment).then(() => dispatch(receiveUpdateComment(comment)));
 
-export const deleteComment = commentId => dispatch =>
-  API.deleteComment(commentId).then(() => dispatch(receiveDeleteComment(commentId)));
+export const deleteComment = comment => dispatch =>
+  API.deleteComment(comment).then(() => dispatch(receiveDeleteComment(comment)));

@@ -10,7 +10,7 @@ const Comment = ({ comment, upVoteComment, downVoteComment, editComment, deleteC
         <p>Score: {comment.voteScore}</p>
         <div>
           <button onClick={() => editComment()}>edit</button>
-          <button onClick={() => deleteComment()}>delete</button>
+          <button onClick={() => deleteComment(comment)}>delete</button>
         </div>
       </div>
       <p>{comment.body}</p>
