@@ -9,15 +9,23 @@ class Categories extends React.Component {
   }
 
   renderCategory = category => {
-    if(this.props.current === category.path) {
-      return <a className="nav-link" key={category.path}>{category.name}</a>;
+    if (this.props.current === category.path) {
+      return (
+        <a className="nav-link" key={category.path}>
+          {category.name}
+        </a>
+      );
     }
-    return <Link className="nav-link" to={`/${category.path}`} key={category.path}>{category.name}</Link>;
+    return (
+      <Link className="nav-link" to={`/${category.path}`} key={category.path}>
+        {category.name}
+      </Link>
+    );
   };
 
   renderCategories = () => {
     const { categories } = this.props;
-    if(Object.keys(categories).length === 0) {
+    if (Object.keys(categories).length === 0) {
       return null;
     }
     return Object.keys(categories).map(key => {
@@ -26,15 +34,11 @@ class Categories extends React.Component {
   };
 
   render() {
-    return (
-      <nav className="nav">
-        {this.renderCategories()}
-      </nav>
-    );
+    return <nav className="nav">{this.renderCategories()}</nav>;
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   categories: state.categories,
 });
 

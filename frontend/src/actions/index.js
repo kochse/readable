@@ -77,22 +77,22 @@ export const fetchCategories = () => dispatch =>
 export const fetchPosts = () => dispatch =>
   API.fetchPosts().then(posts => dispatch(receivePosts(posts)));
 
-export const fetchPost = (postId) => dispatch =>
+export const fetchPost = postId => dispatch =>
   API.fetchPost(postId).then(post => dispatch(receivePost(post)));
 
-export const fetchComments = (postId) => dispatch =>
+export const fetchComments = postId => dispatch =>
   API.fetchComments(postId).then(comments => dispatch(receiveComments(comments)));
 
-export const upVotePost = (postId) => dispatch =>
+export const upVotePost = postId => dispatch =>
   API.votePost(postId, 'upVote').then(() => dispatch(receiveUpVotePost(postId)));
 
-export const downVotePost = (postId) => dispatch =>
+export const downVotePost = postId => dispatch =>
   API.votePost(postId, 'downVote').then(() => dispatch(receiveDownVotePost(postId)));
 
-export const upVoteComment = (commentId) => dispatch =>
+export const upVoteComment = commentId => dispatch =>
   API.voteComment(commentId, 'upVote').then(() => dispatch(receiveUpVoteComment(commentId)));
 
-export const downVoteComment = (commentId) => dispatch =>
+export const downVoteComment = commentId => dispatch =>
   API.voteComment(commentId, 'downVote').then(() => dispatch(receiveDownVoteComment(commentId)));
 
 export const createPost = post => dispatch =>

@@ -13,12 +13,12 @@ const headers = {
   Authorization: token,
 };
 
-export const fetchCategories = () => fetch(`${api}/categories`, { headers })
-  .then(res => res.json())
-  .then(data => data.categories);
+export const fetchCategories = () =>
+  fetch(`${api}/categories`, { headers })
+    .then(res => res.json())
+    .then(data => data.categories);
 
-export const fetchPosts = () => fetch(`${api}/posts`, { headers })
-  .then(res => res.json());
+export const fetchPosts = () => fetch(`${api}/posts`, { headers }).then(res => res.json());
 
 export const fetchPost = postId =>
   fetch(`${api}/posts/${postId}`, { headers }).then(res => res.json());
@@ -46,7 +46,7 @@ export const voteComment = (commentId, option) =>
     body: JSON.stringify({ option }),
   }).then(res => res.json());
 
-export const createPost = (post) => {
+export const createPost = post => {
   const { id, timestamp, title, body, author, category } = post;
   return fetch(`${api}/posts`, {
     method: 'POST',
@@ -56,9 +56,9 @@ export const createPost = (post) => {
     },
     body: JSON.stringify({ id, timestamp, title, body, author, category }),
   }).then(res => res.json());
-}
+};
 
-export const updatePost = (post) => {
+export const updatePost = post => {
   const { id, title, body } = post;
   return fetch(`${api}/posts/${id}`, {
     method: 'PUT',
@@ -68,7 +68,7 @@ export const updatePost = (post) => {
     },
     body: JSON.stringify({ title, body }),
   }).then(res => res.json());
-}
+};
 
 export const deletePost = postId =>
   fetch(`${api}/posts/${postId}`, {
@@ -79,7 +79,7 @@ export const deletePost = postId =>
     },
   }).then(res => res.json());
 
-export const createComment = (comment) => {
+export const createComment = comment => {
   const { parentId, id, timestamp, body, author } = comment;
   return fetch(`${api}/comments`, {
     method: 'POST',
@@ -89,9 +89,9 @@ export const createComment = (comment) => {
     },
     body: JSON.stringify({ id, timestamp, body, author, parentId }),
   }).then(res => res.json());
-}
+};
 
-export const updateComment = (comment) =>
+export const updateComment = comment =>
   fetch(`${api}/comments/${comment.id}`, {
     method: 'PUT',
     headers: {

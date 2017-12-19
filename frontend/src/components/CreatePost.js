@@ -12,19 +12,18 @@ class CreatePost extends React.Component {
     author: '',
   };
 
-  handleCategoryChange = (event) => {
-    this.setState({ ...this.state, category: event.target.value})
+  handleCategoryChange = event => {
+    this.setState({ ...this.state, category: event.target.value });
   };
-  handleTitleChange = (event) => {
-    this.setState({ ...this.state, title: event.target.value})
+  handleTitleChange = event => {
+    this.setState({ ...this.state, title: event.target.value });
   };
-  handleBodyChange = (event) => {
-    this.setState({ ...this.state, body: event.target.value})
+  handleBodyChange = event => {
+    this.setState({ ...this.state, body: event.target.value });
   };
-  handleAuthorChange = (event) => {
-    this.setState({ ...this.state, author: event.target.value})
+  handleAuthorChange = event => {
+    this.setState({ ...this.state, author: event.target.value });
   };
-
 
   componentDidMount() {
     this.props.fetchCategories();
@@ -32,7 +31,9 @@ class CreatePost extends React.Component {
   renderHeader = () => {
     return (
       <div className="pb-2n d-flex justify-content-center">
-        <h4><Link to="/">Readable</Link></h4>
+        <h4>
+          <Link to="/">Readable</Link>
+        </h4>
       </div>
     );
   };
@@ -47,7 +48,7 @@ class CreatePost extends React.Component {
     });
   };
 
-  handleCreatePost = (event) => {
+  handleCreatePost = event => {
     event.preventDefault();
     const post = {
       id: uuidv4(),
@@ -69,24 +70,42 @@ class CreatePost extends React.Component {
       <div className="m-4">
         {this.renderHeader()}
         <h2>Create post</h2>
-        <form onSubmit={(event) => this.handleCreatePost(event)}>
+        <form onSubmit={event => this.handleCreatePost(event)}>
           <div className="form-group">
             <label>Category</label>
-            <select className="form-control" value={this.state.category} onChange={this.handleCategoryChange} >
+            <select
+              className="form-control"
+              value={this.state.category}
+              onChange={this.handleCategoryChange}>
               {this.renderCategories()}
             </select>
           </div>
           <div className="form-group">
             <label>Title</label>
-            <input className="form-control" placeholder="Enter title" value={this.state.title} onChange={this.handleTitleChange} />
+            <input
+              className="form-control"
+              placeholder="Enter title"
+              value={this.state.title}
+              onChange={this.handleTitleChange}
+            />
           </div>
           <div className="form-group">
             <label>Body</label>
-            <textarea className="form-control" rows="3" value={this.state.body} onChange={this.handleBodyChange} />
+            <textarea
+              className="form-control"
+              rows="3"
+              value={this.state.body}
+              onChange={this.handleBodyChange}
+            />
           </div>
           <div className="form-group">
             <label>Author</label>
-            <input className="form-control" placeholder="Enter author" value={this.state.author} onChange={this.handleAuthorChange} />
+            <input
+              className="form-control"
+              placeholder="Enter author"
+              value={this.state.author}
+              onChange={this.handleAuthorChange}
+            />
           </div>
           <button type="submit" className="btn btn-primary">
             Create Post
@@ -99,6 +118,6 @@ class CreatePost extends React.Component {
 
 const mapStateToProps = state => ({
   categories: state.categories,
-})
+});
 
 export default connect(mapStateToProps, { fetchCategories, createPost })(CreatePost);

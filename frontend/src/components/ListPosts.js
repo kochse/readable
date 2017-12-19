@@ -23,9 +23,15 @@ class ListPosts extends React.Component {
     return (
       <div className="pb-2">
         <div className="d-flex justify-content-center">
-          <h4><Link to="/">Readable</Link></h4>
+          <h4>
+            <Link to="/">Readable</Link>
+          </h4>
         </div>
-        <Link to="/create"><button type="button" className="btn btn-light">create post</button></Link>
+        <Link to="/create">
+          <button type="button" className="btn btn-light">
+            create post
+          </button>
+        </Link>
       </div>
     );
   };
@@ -33,7 +39,8 @@ class ListPosts extends React.Component {
   renderSort = () => {
     return (
       <ul>
-        Sort by: <button onClick={() => this.sortByDate(true)}>date</button> <button onClick={() => this.sortByDate(false)}>score</button>
+        Sort by: <button onClick={() => this.sortByDate(true)}>date</button>{' '}
+        <button onClick={() => this.sortByDate(false)}>score</button>
       </ul>
     );
   };
@@ -50,7 +57,15 @@ class ListPosts extends React.Component {
     }
     const { upVotePost, downVotePost } = this.props;
     return Object.keys(posts).map(key => {
-      return <PostItem post={posts[key]} upVotePost={upVotePost} downVotePost={downVotePost} key={key} deletePost={deletePost} />;
+      return (
+        <PostItem
+          post={posts[key]}
+          upVotePost={upVotePost}
+          downVotePost={downVotePost}
+          key={key}
+          deletePost={deletePost}
+        />
+      );
     });
   };
 
@@ -83,4 +98,6 @@ const mapStateToProps = (state, ownProps) => {
   return { posts };
 };
 
-export default connect(mapStateToProps, { fetchPosts, upVotePost, downVotePost, deletePost })(ListPosts);
+export default connect(mapStateToProps, { fetchPosts, upVotePost, downVotePost, deletePost })(
+  ListPosts
+);
