@@ -58,6 +58,7 @@ class CreatePost extends React.Component {
 
   render() {
     if (!this.props.post) {
+      this.props.history.push('/');
       return null;
     }
     return (

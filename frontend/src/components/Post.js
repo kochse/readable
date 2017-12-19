@@ -39,6 +39,7 @@ class Post extends React.Component {
   render() {
     const { postId, post, upVotePost, downVotePost } = this.props;
     if (!post) {
+      this.props.history.push('/');
       return null;
     }
     return (
