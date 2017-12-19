@@ -38,7 +38,7 @@ class Post extends React.Component {
   };
   render() {
     const { postId, post, upVotePost, downVotePost } = this.props;
-    if (!post) {
+    if (!post || post.deleted) {
       this.props.history.push('/');
       return null;
     }
